@@ -33,6 +33,7 @@ Tworzenie nowych elementów HTML
 	* html - innerHTML
 	* fn - funckja z argumentem zwracającym tworzony element
 
+
 	$('#id').addHTML('div',{
 		name: 'name',
 		id: 'id2',
@@ -42,7 +43,7 @@ Tworzenie nowych elementów HTML
 			ele.className = 'next2';
 		}
 	});
-	--> \<div name='name' id='id2' class='next2'/>Text/<//div/>
+	--> \<div name='name' id='id2' class='next2'\>Text\</div\>
 
 ##### Object.sort(object,sortFunction)
 	Object.sort({3: '0', 2: '1', 1: '2'},function(x,y){
