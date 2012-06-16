@@ -14,9 +14,9 @@
 	// zwraca usunięty element, tu element z id=='id'
 
 ##### HTMLElement.move(number)
-* number - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu
-
-
+<ul>
+	<li>number - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu</li>
+</ul>
 
  	$('#id').move(-1);
  	// przesuwa element wewnątrz węzła o daną ilość elementów
