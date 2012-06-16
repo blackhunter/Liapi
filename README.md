@@ -27,17 +27,14 @@
 
 ##### addHTML/HTMLElement.addHTML(tag,params)
 Tworzenie nowych elementów HTML
-<ul>
-<li>tag - HTML tag jak np: div</li>
-<li>[params] - {}</li>
-<ul>
-	<li> name</li>
-	<li> id</li>
-	<li> class</li>
-	<li> html - innerHTML</li>
-	<li> fn - funckja z argumentem zwracającym tworzony element</li>
-</ul><ul/>
-
+* tag - HTML tag jak np: div
+* [params] - {}
+	* name
+	* id
+	* class
+	* html - innerHTML
+	* fn - funckja z argumentem zwracającym tworzony element
+#
 
 	$('#id').addHTML('div',{
 		name: 'name',
