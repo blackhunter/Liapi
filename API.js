@@ -64,12 +64,14 @@ window.HTMLElement.prototype.shuffle = function(now,old){
 					this.insertBefore(this.children[ele],this.children[i]);
 				}
 			}).bind(this);
+
 		if(old==undefined){
 			old = [];
 			for(var i in now){
 				old[i] = i;
 			}
 		}
+
 		now.forEach(move);
 	}else throw Error('Valid parameters length');
 }
