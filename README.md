@@ -10,33 +10,27 @@
 	$$ == document.querySelectorAll
 
 ##### HTMLElement.remove()
-użycie:
-
 	$('#id').remove();
-	--> zwraca usunięty element
+	// zwraca usunięty element, tu element z id=='id'
 
 ##### HTMLElement.remove()
- użycie:
- 
  	$('#id').move(-1);
- 	> przesuwa element wewnątrz węzła o daną ilość elementów
- 	> tutaj o jeden wcześniej
+ 	// przesuwa element wewnątrz węzła o daną ilość elementów
+ 	// tutaj o jeden wcześniej
 
 ##### HTMLElement.insertAfter()
-odwrotność insertBefore
+	odwrotność insertBefore
 
 ##### addHTML/HTMLElement.addHTML(tag,params)
 
 Tworzenie nowych elementów HTML
 * tag - HTML tag jak np: div
 * params - [obiekt]
-* * name
+** name
 * * id
 * * class
 * * html - innerHTML
 * * fn - funckja z argumentem zwracającym dany element
-
-użycie:
 
 	$('#id').addHTML('div',{
 		name: 'name',
@@ -49,10 +43,7 @@ użycie:
 	});
 	--> <div name='name' id='id2' class='next2'>Text</div>
 
-##### Object.sort
-
-Zwraca klucze obiektu posortowane według funkcji
-użycie:
+##### Object.sort(object,sortFunction)
 	Object.sort({3: '0', 2: '1', 1: '2'},function(x,y){
 		return x>y;
 	});
