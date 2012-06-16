@@ -33,6 +33,7 @@ Tworzenie nowych elementów HTML
 	* html - innerHTML
 	* fn - funckja z argumentem zwracającym tworzony element
 
+użycie
 
 	$('#id').addHTML('div',{
 		name: 'name',
