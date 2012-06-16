@@ -16,6 +16,7 @@
 ##### HTMLElement.move(number)
 * number - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu
 
+
  	$('#id').move(-1);
  	// przesuwa element wewnątrz węzła o daną ilość elementów
  	// tutaj o jeden wcześniej
@@ -33,7 +34,6 @@ Tworzenie nowych elementów HTML
 	* html - innerHTML
 	* fn - funckja z argumentem zwracającym tworzony element
 
-użycie
 
 	$('#id').addHTML('div',{
 		name: 'name',
