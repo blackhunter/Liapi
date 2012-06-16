@@ -30,13 +30,12 @@ Tworzenie nowych elementów HTML
 <ul>
 <li>tag - HTML tag jak np: div</li>
 <li>[params] - {}</li>
-<ul>
-	<li><li>* name</li></li>
-	<li><li>* id</li></li>
-	<li><li>* class</li></li>
-	<li><li>* html - innerHTML</li></li>
-	<li><li>* fn - funckja z argumentem zwracającym tworzony element</li></li>
-<ul/></ul>
+	<li> name</li>
+	<li> id</li>
+	<li> class</li>
+	<li> html - innerHTML</li>
+	<li> fn - funckja z argumentem zwracającym tworzony element</li>
+<ul/>
 
 
 	$('#id').addHTML('div',{
