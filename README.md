@@ -18,11 +18,10 @@
  	// przesuwa element wewnątrz węzła o daną ilość elementów
  	// tutaj o jeden wcześniej
 
-##### HTMLElement.insertAfter()
+##### HTMLElement.insertAfter(HTMLElement)
 	odwrotność insertBefore
 
 ##### addHTML/HTMLElement.addHTML(tag,params)
-
 Tworzenie nowych elementów HTML
 * tag - HTML tag jak np: div
 * params - [obiekt]
@@ -49,7 +48,7 @@ Tworzenie nowych elementów HTML
 	});
 	--> [1,2,3]
 
-##### HTMLElement.shuffle
+##### HTMLElement.shuffle()
 
      tab
 > cos
