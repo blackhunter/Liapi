@@ -50,6 +50,9 @@ Tworzenie nowych elementów HTML
 ```
 
 #### Object.sort(object,sortFunction)
+* **object** - obiekt, którego klucze będziemy sortować
+* **sortFunction** - funkcja sortująca, analogicznie do Array.sort()
+
 ``` js
 	Object.sort({3: '0', 2: '1', 1: '2'},function(x,y){
 		return x>y;
@@ -58,17 +61,30 @@ Tworzenie nowych elementów HTML
 ```
 #### HTMLElement.shuffle()
 
-     tab
-> cos
-> ktos
+#### Constructor   xhr(options)
+* **[options]** - {}
+	* onError - funkcja w przypadku błędu
+	* onEnd - funkcja na koniec
+	* onSuccess - funkcja w przypadku powodzenia
+	* method - domyślnie 'GET'
+	* sync - połączenie synchroniczne, domyślnie false
+	* data - dane do przesłania, w GET są automatycznie parsowane do url, domyślnie null
+	* url - adres
+	* type - responseType
 
-> single
-> > double
+##### Metody
+* abort - przerywa żądzanie
+* send(['json'/'text']) - wysyła żądanie, możliwość zdefiniowania dwóch 'Content-Type'
+* form(form) - pobieranie danych z formularza(url, method, data), dane wysłane jak przy formularzach, zwraca obiekt typu: FormData
 
-> sinlge
->	with tab
-
-1. list
-1. list2
-* cos
-* ktos
+``` js
+	var ajax = new xhr({
+		onSucces: function(data){
+			console.log(data);
+		},
+		url: 'google.com',
+		method: 'POST'
+	});
+	ajax.send();
+````
+[XHR level 2](http://www.html5rocks.com/en/tutorials/file/xhr2/)
