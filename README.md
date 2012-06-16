@@ -1,4 +1,8 @@
-### h3
+### Kilka ułatwień
+
+## API
+	$ to samo co document.querySelector;
+
      tab
 > cos
 > ktos
