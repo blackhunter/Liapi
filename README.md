@@ -1,8 +1,8 @@
 ### Kilka ułatwień
 
 ## API
-	$ to samo co document.querySelector;
-
+	$ -> document.querySelector;
+	$$ -> document.querySelectorAll;
      tab
 > cos
 > ktos
