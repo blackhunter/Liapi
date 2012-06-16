@@ -10,14 +10,12 @@
 	$$ == document.querySelectorAll
 
 #### HTMLElement.remove()
-``` ja
+``` js
 	$('#id').remove();
 	// zwraca usunięty element, tu element z id=='id'
 ```
 #### HTMLElement.move(number)
-<ul>
-	<li>number - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu</li>
-</ul>
+* **number** - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu
 
 ``` js
  	$('#id').move(-1);
@@ -30,8 +28,8 @@
 
 #### addHTML/HTMLElement.addHTML(tag,params)
 Tworzenie nowych elementów HTML
-* tag - HTML tag jak np: div
-* [params] - {}
+* **tag** - HTML tag jak np: div
+* **[params]** - {}
 	* name
 	* id
 	* class
@@ -48,7 +46,7 @@ Tworzenie nowych elementów HTML
 			ele.className = 'next2';
 		}
 	});
-	--> \<div name='name' id='id2' class='next2'\>Text\</div\>
+	--> <div name='name' id='id2' class='next2'>Text</div>
 ```
 
 #### Object.sort(object,sortFunction)
