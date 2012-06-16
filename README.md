@@ -1,31 +1,34 @@
 ## Kilka ułatwień
 
-#### API
+### API
 ---
 
-##### $(selector)
+#### $(selector)
 	$ == document.querySelector
----
-##### $$(selector)
+
+#### $$(selector)
 	$$ == document.querySelectorAll
----
-##### HTMLElement.remove()
+
+#### HTMLElement.remove()
+``` ja
 	$('#id').remove();
 	// zwraca usunięty element, tu element z id=='id'
-
-##### HTMLElement.move(number)
+```
+#### HTMLElement.move(number)
 <ul>
 	<li>number - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu</li>
 </ul>
 
+``` js
  	$('#id').move(-1);
  	// przesuwa element wewnątrz węzła o daną ilość elementów
  	// tutaj o jeden wcześniej
----
-##### HTMLElement.insertAfter(HTMLElement)
+```
+
+#### HTMLElement.insertAfter(HTMLElement)
 	przeciwieństwo: HTMLElement.insertBefore
----
-##### addHTML/HTMLElement.addHTML(tag,params)
+
+#### addHTML/HTMLElement.addHTML(tag,params)
 Tworzenie nowych elementów HTML
 * tag - HTML tag jak np: div
 * [params] - {}
@@ -35,7 +38,7 @@ Tworzenie nowych elementów HTML
 	* html - innerHTML
 	* fn - funckja z argumentem zwracającym tworzony element
 
-
+``` js
 	$('#id').addHTML('div',{
 		name: 'name',
 		id: 'id2',
@@ -46,14 +49,16 @@ Tworzenie nowych elementów HTML
 		}
 	});
 	--> \<div name='name' id='id2' class='next2'\>Text\</div\>
----
-##### Object.sort(object,sortFunction)
+```
+
+#### Object.sort(object,sortFunction)
+``` js
 	Object.sort({3: '0', 2: '1', 1: '2'},function(x,y){
 		return x>y;
 	});
 	--> [1,2,3]
----
-##### HTMLElement.shuffle()
+```
+#### HTMLElement.shuffle()
 
      tab
 > cos
