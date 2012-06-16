@@ -25,11 +25,11 @@
 Tworzenie nowych elementów HTML
 * tag - HTML tag jak np: div
 * params - [obiekt]
-** name
+* name
 * * id
 * * class
 * * html - innerHTML
-* * fn - funckja z argumentem zwracającym dany element
+	* fn - funckja z argumentem zwracającym dany element
 
 	$('#id').addHTML('div',{
 		name: 'name',
