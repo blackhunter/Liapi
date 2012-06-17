@@ -4,14 +4,35 @@
 <head>
 	<title></title>
 	<script type="text/javascript">
-		//var _insertBefore = window.HTMLElement.prototype.insertBefore;
-		window.HTMLElement.prototype.asNext = function(element){
-			return this.parentNode.insertBefore(element,this.nextSibling);
+		window.HTMLElement.prototype.shuffle = function(now,old){
+			if(this.children.length==now.length && (old==undefined || old.length!=now.length)){
+				var changes=0,
+						index,
+						move = (function(ele,i){
+							if(index){
+								index = old.indexOf(ele);
+								if(index==-1)   throw Error('Wrong table order');
+								old.splice(index,1);
+								if(index+changes!=i){
+									this.insertBefore(this.children[index+changes],this.children[changes]);
+								}
+								changes++;
+							}else{
+								this.insertBefore(this.children[ele],this.children[i]);
+							}
+						}).bind(this);
+
+				if(old==undefined){
+					old = [];
+					for(var i in now){
+						old[i] = i;
+					}
+				}
+
+				now.forEach(move);
+			}else throw Error('Valid parameters length');
 		}
 
-		window.HTMLElement.prototype.asPrev = function(element){
-			return this.parentNode.insertBefore(element,this);
-		}
 		i=10;
 		function start(){
 			var body = document.querySelector('body');

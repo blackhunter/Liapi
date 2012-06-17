@@ -1,7 +1,4 @@
-## Kilka ułatwień
-
 ## API
----
 
 ## $ (selector)
 	$ == document.querySelector
@@ -62,11 +59,6 @@ Tworzenie nowych elementów HTML
 	});
 	--> [1,2,3]
 ```
-
-## HTMLElement.shuffle ()
-
-
-
 
 ## xhr (options) [constructor]
 * **[options]** - {}

@@ -52,35 +52,6 @@
 	}
 	window.HTMLElement.prototype.addHTML = window.addHTML;
 
-	window.HTMLElement.prototype.shuffle = function(now,old){
-		if(this.children.length==now.length && (old==undefined || old.length!=now.length)){
-			var changes=0,
-				index,
-				move = (function(ele,i){
-					if(index){
-						index = old.indexOf(ele);
-						if(index==-1)   throw Error('Wrong table order');
-						old.splice(index,1);
-						if(index+changes!=i){
-							this.insertBefore(this.children[index+changes],this.children[changes]);
-						}
-						changes++;
-					}else{
-						this.insertBefore(this.children[ele],this.children[i]);
-					}
-				}).bind(this);
-
-			if(old==undefined){
-				old = [];
-				for(var i in now){
-					old[i] = i;
-				}
-			}
-
-			now.forEach(move);
-		}else throw Error('Valid parameters length');
-	}
-
 	Object.defineProperty(Object, 'sort', {
 		value : function(obj,fn){
 			return Object.keys(obj).sort(fn.bind(obj));
@@ -187,3 +158,34 @@ function xhr( options ) {
 		}
 	}).bind(this);
 }
+
+/*
+ window.HTMLElement.prototype.shuffle = function(now,old){
+ if(this.children.length==now.length && (old==undefined || old.length!=now.length)){
+ var changes=0,
+ index,
+ move = (function(ele,i){
+ if(index){
+ index = old.indexOf(ele);
+ if(index==-1)   throw Error('Wrong table order');
+ old.splice(index,1);
+ if(index+changes!=i){
+ this.insertBefore(this.children[index+changes],this.children[changes]);
+ }
+ changes++;
+ }else{
+ this.insertBefore(this.children[ele],this.children[i]);
+ }
+ }).bind(this);
+
+ if(old==undefined){
+ old = [];
+ for(var i in now){
+ old[i] = i;
+ }
+ }
+
+ now.forEach(move);
+ }else throw Error('Valid parameters length');
+ }
+*/
