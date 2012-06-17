@@ -1,20 +1,20 @@
 ## Kilka ułatwień
 
-### API
+## API
 ---
 
-#### $(selector)
+## $ (selector)
 	$ == document.querySelector
 
-#### $$(selector)
+## $$ (selector)
 	$$ == document.querySelectorAll
 
-#### HTMLElement.remove()
+## HTMLElement.remove ()
 ``` js
-	$('#id').remove();
+	$('#id').remove ();
 	// zwraca usunięty element, tu element z id=='id'
 ```
-#### HTMLElement.move(number)
+## HTMLElement.move (number)
 * **number** - przesunięcie o n elemntów, dla n<0 przesunięcie do przodu
 
 ``` js
@@ -23,10 +23,13 @@
  	// tutaj o jeden wcześniej
 ```
 
-#### HTMLElement.insertAfter(HTMLElement)
-	przeciwieństwo: HTMLElement.insertBefore
+## HTMLElement.asPrev (HTMLElement)
+	łatwiejsze użycie HTMLElement.insertBefore
 
-#### addHTML/HTMLElement.addHTML(tag,params)
+## HTMLElement.asNext (HTMLElement)
+	przeciwieństwo: HTMLElement.asPrev
+
+## addHTML / HTMLElement.addHTML (tag,params)
 Tworzenie nowych elementów HTML
 * **tag** - HTML tag jak np: div
 * **[params]** - {}
@@ -49,7 +52,7 @@ Tworzenie nowych elementów HTML
 	--> <div name='name' id='id2' class='next2'>Text</div>
 ```
 
-#### Object.sort(object,sortFunction)
+## Object.sort (object,sortFunction)
 * **object** - obiekt, którego klucze będziemy sortować
 * **sortFunction** - funkcja sortująca, analogicznie do Array.sort()
 
@@ -59,9 +62,13 @@ Tworzenie nowych elementów HTML
 	});
 	--> [1,2,3]
 ```
-#### HTMLElement.shuffle()
 
-#### Constructor   xhr(options)
+## HTMLElement.shuffle ()
+
+
+
+
+## xhr (options) [constructor]
 * **[options]** - {}
 	* onError - funkcja w przypadku błędu
 	* onEnd - funkcja na koniec
@@ -72,7 +79,7 @@ Tworzenie nowych elementów HTML
 	* url - adres
 	* type - responseType
 
-##### Metody
+### Metody
 * abort - przerywa żądzanie
 * send(['json'/'text']) - wysyła żądanie, możliwość zdefiniowania dwóch 'Content-Type'
 * form(form) - pobieranie danych z formularza(url, method, data), dane wysłane jak przy formularzach, zwraca obiekt typu: FormData

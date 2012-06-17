@@ -1,88 +1,94 @@
-window.HTMLElement.prototype.remove = function(){
-	return this.parentNode.removeChild(this);
-}
-
-window.HTMLElement.prototype.move = function(number){   //co kiedy nie ma dalszych elementów?
-	var place = this,
-		i = 0;
-
-	if(number>0 && place.nextElementSibling){
-		place = place.nextElementSibling;
-		while(i!=number){
-			place = place.nextElementSibling;
-			if(place===null)    break;
-			i++;
-		}
-	}else{
-		while(i!=number && place.previousElementSibling){
-			place = place.previousElementSibling;
-			i--;
-		}
+(function(){
+	window.HTMLElement.prototype.remove = function(){
+		return this.parentNode.removeChild(this);
 	}
-	this.parentNode.insertBefore(this,place)
-}
 
-window.HTMLElement.prototype.insertAfter = function(element){   //tu to samo
-	return this.parentNode.insertBefore(element,this.nextSibling.nextSibling);
-}
+	window.HTMLElement.prototype.move = function(number){
+		var place = this,
+			i = 0;
 
-window.$ = document.querySelector;
-window.HTMLElement.prototype.$ = function(){
-	return this.querySelector.apply(this,arguments);
-}
-
-window.$$ = document.querySelectorAll;
-window.HTMLElement.prototype.$$ = function(){
-	return this.querySelectorAll.apply(this,arguments);
-}
-
-window.addHTML = function(tag,args){
-	var element = document.createElement('tag');
-	if(args.name)   element.setAttribute('name',args.name);
-	if(args.id) element.id = args.id;
-	if(args.class)  element.className = args.class;
-	if(args.html)  element.innerHTML = args.html;
-	if(args.fn) args.fn.call(element);
-	return element;
-}
-window.HTMLElement.prototype.addHTML = window.addHTML;
-
-window.HTMLElement.prototype.shuffle = function(now,old){
-	if(this.children.length==now.length && (old==undefined || old.length!=now.length)){
-		var changes=0,
-			index,
-			move = (function(ele,i){
-				if(index){
-					index = old.indexOf(ele);
-					old.splice(index,1);
-					if(index==-1)   throw Error('Wrong table order');
-					if(index+changes!=i){
-						this.insertBefore(this.children[index+changes],this.children[changes]);
-					}
-					changes++;
-				}else{
-					this.insertBefore(this.children[ele],this.children[i]);
-				}
-			}).bind(this);
-
-		if(old==undefined){
-			old = [];
-			for(var i in now){
-				old[i] = i;
+		if(number>0 && place.nextElementSibling){
+			place = place.nextElementSibling;
+			while(i!=number){
+				place = place.nextElementSibling;
+				if(place===null)    break;
+				i++;
+			}
+		}else{
+			while(i!=number && place.previousElementSibling){
+				place = place.previousElementSibling;
+				i--;
 			}
 		}
+		this.parentNode.insertBefore(this,place);
+	}
 
-		now.forEach(move);
-	}else throw Error('Valid parameters length');
-}
+	window.HTMLElement.prototype.asNext = function(element){
+		return this.parentNode.insertBefore(element,this.nextElementSibling);
+	}
 
-Object.defineProperty(Object, 'sort', {
-	value : function(obj,fn){
-		return Object.keys(obj).sort(fn.bind(obj));
-	},
-	writable : false,
-	enumerable : false,
-	configurable : true
+	window.HTMLElement.prototype.asPrev = function(element){
+		return this.parentNode.insertBefore(element,this);
+	}
+
+	window.$ = document.querySelector;
+	window.HTMLElement.prototype.$ = function(){
+		return this.querySelector.apply(this,arguments);
+	}
+
+	window.$$ = document.querySelectorAll;
+	window.HTMLElement.prototype.$$ = function(){
+		return this.querySelectorAll.apply(this,arguments);
+	}
+
+	window.addHTML = function(tag,args){
+		var element = document.createElement('tag');
+		if(args.name)   element.setAttribute('name',args.name);
+		if(args.id) element.id = args.id;
+		if(args.class)  element.className = args.class;
+		if(args.html)  element.innerHTML = args.html;
+		if(args.fn) args.fn.call(element);
+		return element;
+	}
+	window.HTMLElement.prototype.addHTML = window.addHTML;
+
+	window.HTMLElement.prototype.shuffle = function(now,old){
+		if(this.children.length==now.length && (old==undefined || old.length!=now.length)){
+			var changes=0,
+				index,
+				move = (function(ele,i){
+					if(index){
+						index = old.indexOf(ele);
+						if(index==-1)   throw Error('Wrong table order');
+						old.splice(index,1);
+						if(index+changes!=i){
+							this.insertBefore(this.children[index+changes],this.children[changes]);
+						}
+						changes++;
+					}else{
+						this.insertBefore(this.children[ele],this.children[i]);
+					}
+				}).bind(this);
+
+			if(old==undefined){
+				old = [];
+				for(var i in now){
+					old[i] = i;
+				}
+			}
+
+			now.forEach(move);
+		}else throw Error('Valid parameters length');
+	}
+
+	Object.defineProperty(Object, 'sort', {
+		value : function(obj,fn){
+			return Object.keys(obj).sort(fn.bind(obj));
+		},
+		writable : false,
+		enumerable : false,
+		configurable : true
+	});
 });
 
 function xhr( options ) {
