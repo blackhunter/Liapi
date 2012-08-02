@@ -72,7 +72,7 @@ Tworzenie nowych elementów HTML
 * send ( [data] ) - wysyła żądanie, opcjonalnie dane do przesłania
 * upload ( fuu ) - wykonuje funkcje **fuu** podając argumenty: dane wysłane, dane wszystkie
 * scout ( id, data ) - wysłanie żądanie jak **send**, żądania wysłane przy pomocy **next** zostaną wysłane dopiero po zakończeniu tego zdarzenia
- * next ( id, data ) - wysłanie żądanie lecz dopiero po zakończeniu połączenia **scout** o podanym id
+* next ( id, data ) - wysłanie żądanie lecz dopiero po zakończeniu połączenia **scout** o podanym id
 
 ### Własności
 * xhr - obiekt komunikacji
