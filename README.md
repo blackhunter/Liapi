@@ -60,30 +60,25 @@ Tworzenie nowych elementów HTML
 	--> [1,2,3]
 ```
 
-## xhr (options) [constructor]
-* **[options]** - {}
-	* onError - funkcja w przypadku błędu
-	* onEnd - funkcja na koniec
-	* onSuccess - funkcja w przypadku powodzenia
-	* method - domyślnie 'GET'
-	* sync - połączenie synchroniczne, domyślnie false
-	* data - dane do przesłania, w GET są automatycznie parsowane do url, domyślnie null
-	* url - adres
-	* type - responseType
+## xhr ( url[, method, sync] ) [constructor]
+* url - adres url
+* method - domyślnie 'GET'
+* sync - połączenie synchroniczne, domyślnie false
 
 ### Metody
-* abort - przerywa żądzanie
-* send(['json'/'text']) - wysyła żądanie, możliwość zdefiniowania dwóch 'Content-Type'
-* form(form) - pobieranie danych z formularza(url, method, data), dane wysłane jak przy formularzach, zwraca obiekt typu: FormData
+* on ( event, function) - uchwyt dla ( end, error, done )
+* form ( [form] ) - tworzy obiekt FormData, jeżeli wskazujemy formularz urzywa go jako argumentu.
+* abort ( ) - przerywa żądzanie
+* send ( [data] ) - wysyła żądanie, opcjonalnie dane do przesłania
+* upload ( fuu ) - wykonuje funkcje **fuu** podając argumenty: dane wysłane, dane wszystkie
+* scout ( id, data ) - wysłanie żądanie jak **send**, żądania wysłane przy pomocy **next** zostaną wysłane dopiero po zakończeniu tego zdarzenia
+ * next ( id, data ) - wysłanie żądanie lecz dopiero po zakończeniu połączenia **scout** o podanym id
 
-``` js
-	var ajax = new xhr({
-		onSucces: function(data){
-			console.log(data);
-		},
-		url: 'google.com',
-		method: 'POST'
-	});
-	ajax.send();
-````
+### Własności
+* xhr - obiekt komunikacji
+* data - dane do przesłania
+* url - adres url
+* afterId - domyślnie false, true gdy **next** lub id gdy **scout**
+* afterList - tablica żadań **next** do wysłania po połączeniu
+
 [XHR level 2](http://www.html5rocks.com/en/tutorials/file/xhr2/)
