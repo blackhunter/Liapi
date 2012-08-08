@@ -69,8 +69,8 @@
 		configurable : true
 	});
 	
-	window.cal = {
-		sDay: ['N','P','W','Ś','C','P','S'],
+	window.document.cal = {
+		days: ['N','P','W','Ś','C','P','S'],
 		month: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
 	}
 })();
@@ -167,6 +167,8 @@ function xhr( url, method, sync, control ) {
 		return this;
 	};
 	this.send = function(data){
+		if(this==window)
+			throw new Error('Outside usage of xhr\'s method, use xhr.send.bind(xhr) instead');
 		if(this.afterId)
 			this.afterList = window.connects.prev(this.afterId);
 		try{
@@ -174,13 +176,13 @@ function xhr( url, method, sync, control ) {
 				this.xhr = new XMLHttpRequest();
 			if(data!=undefined)
 				this.data = data;
-
 			this.xhr.open(this.method, this.url, this.sync);
 			if(!this.formData)
 				this._send(this.method);
 			this.xhr.send(data);
 		}catch(e){
-			this.onerror(e.message);
+			console.log(e.message);
+			this.onerror(e.message,this);
 		}
 
 		return this;
@@ -203,12 +205,14 @@ function xhr( url, method, sync, control ) {
 	this.scout = function(id,data){
 		this.afterList = window.connects.prev(id);
 		this.send(data);
+		return this;
 	};
 	this.next = function(id,data){
 		if(data!=undefined)
 			this.data = data;
 		this.afterId = true;
 		window.connects.addAfter(id,this);
+		return this;
 	};
 
 	this.xhr.onreadystatechange = (function(){
@@ -225,7 +229,7 @@ function xhr( url, method, sync, control ) {
 				if(this.control && this.afterId!==true){
 					window.connects.stack(this);
 				}
-				this.onerror(this.xhr.response);
+				this.onerror(this.xhr.response,this);
 			}
 			this.onend();
 			this.xhr = null;

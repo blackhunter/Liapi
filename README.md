@@ -1,5 +1,13 @@
 ## API
 
+## document.cal
+``` js
+	{
+		days: ['N','P','W','Ś','C','P','S'],
+		month: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
+	}
+```
+
 ## $ (selector)
 	$ == document.querySelector
 
@@ -42,8 +50,8 @@ Tworzenie nowych elementów HTML
 		id: 'id2',
 		class: 'next',
 		html: 'Text',
-		fn: function(ele){
-			ele.className = 'next2';
+		fn: function(){
+			this.className = 'next2';
 		}
 	});
 	--> <div name='name' id='id2' class='next2'>Text</div>
