@@ -1,79 +1,126 @@
-(function(){
-	window.HTMLElement.prototype.remove = function(){
-		return this.parentNode.removeChild(this);
-	}
+/**
+ * Remove node
+ * @return {Node} removed HTML element
+ */
+window.HTMLElement.prototype.remove = function(){
+	return this.parentNode.removeChild(this);
+}
 
-	window.HTMLElement.prototype.move = function(number){
-		var place = this,
-			i = 0;
+window.HTMLElement.prototype.move = function(number){
+	var place = this,
+		i = 0;
 
-		if(number>0 && place.nextElementSibling){
+	if(number>0 && place.nextElementSibling){
+		place = place.nextElementSibling;
+		while(i!=number){
 			place = place.nextElementSibling;
-			while(i!=number){
-				place = place.nextElementSibling;
-				if(place===null)    break;
-				i++;
-			}
-		}else{
-			while(i!=number && place.previousElementSibling){
-				place = place.previousElementSibling;
-				i--;
-			}
+			if(place===null)    break;
+			i++;
 		}
-		this.parentNode.insertBefore(this,place);
-	}
-
-	window.HTMLElement.prototype.asNext = function(element){
-		return this.parentNode.insertBefore(element,this.nextElementSibling);
-	}
-
-	window.HTMLElement.prototype.asPrev = function(element){
-		return this.parentNode.insertBefore(element,this);
-	}
-
-	window.$ = function(p){
-		return document.querySelector(p);
-	}
-	window.HTMLElement.prototype.$ = function(){
-		return this.querySelector.apply(this,arguments);
-	}
-
-	window.$$ = function(p){
-		return document.querySelectorAll(p);
-	}
-	window.HTMLElement.prototype.$$ = function(){
-		return this.querySelectorAll.apply(this,arguments);
-	}
-
-	window.addHTML = function(tag,args){
-		var element = document.createElement(tag);
-		if(args){
-			if(args.name)   element.setAttribute('name',args.name);
-			if(args.id) element.id = args.id;
-			if(args.class)  element.className = args.class;
-			if(args.html)  element.innerHTML = args.html;
-			if(args.fn) args.fn.call(element);
+	}else{
+		while(i!=number && place.previousElementSibling){
+			place = place.previousElementSibling;
+			i--;
 		}
-		return element;
 	}
-	window.HTMLElement.prototype.addHTML = function(){
-		return this.appendChild(window.addHTML.apply(this,arguments));
-	}
+	this.parentNode.insertBefore(this,place);
+}
 
-	Object.defineProperty(Object, 'sort', {
-		value : function(obj,fn){
-			return Object.keys(obj).sort(fn.bind(obj));
-		},
-		writable : false,
-		enumerable : false,
-		configurable : true
-	});
-	
-	window.document.cal = {
-		days: ['N','P','W','Ś','C','P','S'],
-		month: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
+/**
+ * Insert node after
+ * @param {Node} element Node to inset
+ * @return {Node} Inserted node
+ */
+window.HTMLElement.prototype.asNext = function(element){
+	return this.parentNode.insertBefore(element,this.nextElementSibling);
+}
+
+/**
+ * Insert node before
+ * @param {Node} element Node to inset
+ * @return {Node} Inserted node
+ */
+window.HTMLElement.prototype.asPrev = function(element){
+	return this.parentNode.insertBefore(element,this);
+}
+
+/**
+ * Query Selector
+ * @param {string} p css like selector
+ * @return {Node} HTML element (node)
+ */
+window.$ = function(p){
+	return document.querySelector(p);
+}
+
+/**
+ * Query Selector All
+ * @param {string} p css like selector
+ * @return {Array.<Node>} array of HTML elements (nodes)
+ */
+window.$$ = function(p){
+	return document.querySelectorAll(p);
+}
+
+/**
+ * Query Selector inside node
+ * @param {string} p css like selector
+ * @return {Node} HTML element (node)
+ */
+window.HTMLElement.prototype.$ = function(){
+	return this.querySelector.apply(this,arguments);
+}
+
+/**
+ * Query Selector All inside node
+ * @param {string} p css like selector
+ * @return {Node} array of HTML elements (nodes)
+ */
+window.HTMLElement.prototype.$$ = function(){
+	return this.querySelectorAll.apply(this,arguments);
+}
+
+/**
+ * Create node
+ * @param {string} tag HTML tag of node
+ * @param {object} args name, id, class, html ( innerHTML ), fn ( fun )
+ * @return {HTMLElement} Created node
+ */
+window.addHTML = function(tag,args){
+	var element = document.createElement(tag);
+	if(args){
+		if(args.name)   element.setAttribute('name',args.name);
+		if(args.id) element.id = args.id;
+		if(args.class)  element.className = args.class;
+		if(args.html)  element.innerHTML = args.html;
+		if(args.fn) args.fn(element);
 	}
-})();
+	return element;
+}
+
+/**
+ * Create node inside element
+ * @param {string} tag HTML tag of node
+ * @param {object} args name, id, class, html ( innerHTML ), fn ( fun )
+ * @return {HTMLElement} Created node
+ */
+window.HTMLElement.prototype.addHTML = function(){
+	return this.appendChild(window.addHTML.apply(this,arguments));
+}
+
+Object.defineProperty(Object, 'sort', {
+	value : function(obj,fn){
+		return Object.keys(obj).sort(fn.bind(obj));
+	},
+	writable : false,
+	enumerable : false,
+	configurable : true
+});
+
+window.document.cal = {
+	days: ['N','P','W','Ś','C','P','S'],
+	month: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
+}
 
 window.connects = {
 	sec: 15*1000,
@@ -105,6 +152,13 @@ window.connects = {
 	}
 };
 
+/**
+ * @constructor
+ * @param {string} url url adress
+ * @param {string} method GET, POST, ...
+ * @param {bool} sync true for sych
+ * @param control
+ */
 function xhr( url, method, sync, control ) {
 	this.onerror = function(){};
 	this.onend = function(){};
@@ -117,7 +171,7 @@ function xhr( url, method, sync, control ) {
 	this.afterList = null;
 	this.control = !!control;
 
-	if(typeof method == 'boolean'){
+	if(typeof method != 'string'){
 		this.method = 'GET';
 		this.sync = !!method;
 	}else{
@@ -125,7 +179,7 @@ function xhr( url, method, sync, control ) {
 		this.sync = !!sync;
 	}
 
-	this.xhr = new XMLHttpRequest();
+	this.xhr = null;
 	this.form = function(form){
 		if(form){
 			this.url = form.action;
@@ -149,11 +203,11 @@ function xhr( url, method, sync, control ) {
 				this.url += '?'+text.join('&');
 				this.data = null;
 			}else if(method=='POST' || method=='PUT' || method=='DELETE'){
-				if(typeof this.data == 'object'){
+				if(typeof this.data == 'object')//{
 					this.data =  JSON.stringify(this.data);
-					this.xhr.setRequestHeader('Content-Type', 'application/json');
-				}else
-					this.xhr.setRequestHeader('Content-Type', 'text/xml');
+					//this.xhr.setRequestHeader('Content-Type', 'application/json');
+				//}else
+				//	this.xhr.setRequestHeader('Content-Type', 'text/xml');
 			}else{
 				this.data = null;
 			}
@@ -172,19 +226,24 @@ function xhr( url, method, sync, control ) {
 		if(this.afterId)
 			this.afterList = window.connects.prev(this.afterId);
 		try{
-			if(this.xhr==null)
-				this.xhr = new XMLHttpRequest();
 			if(data!=undefined)
 				this.data = data;
-			this.xhr.open(this.method, this.url, this.sync);
 			if(!this.formData)
 				this._send(this.method);
-			this.xhr.send(data);
+				
+			this.xhr.open(this.method, this.url, this.sync);
+
+			this.xhr.send(this.data);
 		}catch(e){
 			console.log(e.message);
 			this.onerror(e.message,this);
 		}
 
+		return this;
+	};
+	this.responseType = function(type){
+		this.xhr.responseType = type;
+		
 		return this;
 	};
 	this.abort = function(){
@@ -214,25 +273,28 @@ function xhr( url, method, sync, control ) {
 		window.connects.addAfter(id,this);
 		return this;
 	};
-
-	this.xhr.onreadystatechange = (function(){
-		if ( this.xhr.readyState == 4) {
-			if (this.xhr.status >= 200 && this.xhr.status < 300 || this.xhr.status == 304) {
-				this.ondone(this.xhr.response);
-				if(this.afterList){
-					for(var i=0;i<this.afterList.length;i++){
-						this.afterList[i].send();
+	this.setXHR = function(){
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (function(){
+			if ( this.xhr.readyState == 4) {
+				if (this.xhr.status >= 200 && this.xhr.status < 300 || this.xhr.status == 304) {
+					this.ondone(this.xhr.responseText);
+					if(this.afterList){
+						for(var i=0;i<this.afterList.length;i++){
+							this.afterList[i].send();
+						}
+						this.afterList = null;
 					}
-					this.afterList = null;
+				} else {
+					if(this.control && this.afterId!==true){
+						window.connects.stack(this);
+					}
+					this.onerror(this.xhr.response,this);
 				}
-			} else {
-				if(this.control && this.afterId!==true){
-					window.connects.stack(this);
-				}
-				this.onerror(this.xhr.response,this);
+				this.onend();
+				this.setXHR();
 			}
-			this.onend();
-			this.xhr = null;
-		}
-	}).bind(this);
+		}).bind(this);
+	}
+	this.setXHR();
 }
